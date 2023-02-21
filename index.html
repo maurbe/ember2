@@ -8,9 +8,9 @@
    ember2
   </title>
   <meta content="EMBER-2" property="og:title"/>
-  <meta content="We eliminate “texture sticking” in GANs through a comprehensive overhaul of all signal processing aspects of the generator, paving the way for better synthesis of video and animation." name="description" property="og:description"/>
-  <meta content="https://nvlabs-fi-cdn.nvidia.com/_web/stylegan3/img/stylegan3-teaser-1920x1006.png" property="og:image"/>
-  <meta content="https://nvlabs.github.io/stylegan3" property="og:url"/>
+  <meta content="Official website of the EMBER-2 project." name="description" property="og:description"/>
+  <meta content="https://raw.githubusercontent.com/maurbe/ember2/gh-pages/scr/overview.png" property="og:image"/>
+  <meta content="https://maurbe.github.io/ember2" property="og:url"/>
   <style type="text/css">
    :root {
     --small-thumb-border-radius: 2px;
@@ -63,25 +63,7 @@ body {
     .n-footer {
         display: grid;
         justify-items: stretch;
-        grid-template-columns: [screen-start] 1fr [page-start kicker-start middle-start text-start] 45px 45px 45px 45px 45px 45px 45px 45px [ kicker-end text-end gutter-start] 45px [middle-end] 45px [page-end gutter-end] 1fr [screen-end];
-        grid-column-gap: 16px;
-    }
-
-    .grid {
-        grid-column-gap: 16px;
-    }
-}
-
-@media(min-width: 1000px) {
-    .base-grid,
-    .n-header,
-    .n-byline,
-    .n-title,
-    .n-article,
-    .n-footer {
-        display: grid;
-        justify-items: stretch;
-        grid-template-columns: [screen-start] 1fr [page-start kicker-start] 50px [middle-start] 50px [text-start kicker-end] 50px 50px 50px 50px 50px 50px 50px 50px [text-end gutter-start] 50px [middle-end] 50px [page-end gutter-end] 1fr [screen-end];
+        grid-template-columns: [screen-start] 1fr [page-start kicker-start middle-start text-start] 75px 75px 75px 75px 75px 75px 75px 75px [ kicker-end text-end gutter-start] 5px [middle-end] 5px [page-end gutter-end] 1fr [screen-end];
         grid-column-gap: 16px;
     }
 
@@ -99,7 +81,7 @@ body {
     .n-footer {
         display: grid;
         justify-items: stretch;
-        grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+        grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 175px 75px 75px 75px 75px 75px 75px 75px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
         grid-column-gap: 32px;
     }
     .grid {
@@ -156,24 +138,26 @@ strong {
 
 /*------------------------------------------------------------------*/
 /* title */
+/* here we can set the title configs */
 .n-title h1 {
     font-family: "Barlow",system-ui,Arial,sans-serif;
     color:#082333;
     grid-column: text;
-    font-size: 35px;
+    font-size: 55px;
     font-weight: 700;
     line-height: 1.1em;
     margin: 0 0 0.5rem;
     text-align: center;
 }
 
+/* here we call the title object with the config above */
 @media (min-width: 768px) {
     .n-title h1 {
-        font-size: 50px;
     }
 }
 
 /*------------------------------------------------------------------*/
+/* this is the space between the second horizontal  */
 /* article */
 .n-article {
     color: rgb(33, 40, 53);
@@ -332,7 +316,6 @@ pre {
 }
 
 /* video caption */
-
 .video {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -340,7 +323,7 @@ pre {
 
 .videocaption {
     display: flex;
-    font-size: 16px;
+    font-size: 13px;
     line-height: 1.5em;
     margin-bottom: 1rem;
     justify-content: center;
@@ -520,14 +503,16 @@ h3.figtitle {
     </div>
    </div>
    <h2 id="videos">
-    Videos
+    Movies
    </h2>
    <p>
-    Video text.
+    The following videos are part of the analysis performed on the learned distribution acting as a visual
+    guide 
+    Smooth interpolation of redshift parameter in context vector c, for fixed dark matter field x.
    </p>
    <div class="l-article video">
     <center>
-        <video controls="" loop="" width="100%">
+        <video controls="" loop="" width="80%">
          <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
          <source src="https://user-images.githubusercontent.com/26961870/206722603-77efc234-5b80-4ecc-b3dc-5f8826397551.mp4" type="video/mp4"/>
         </video>
@@ -535,9 +520,25 @@ h3.figtitle {
     <div class="videocaption">
      <div>
       <strong>
-       Movie 1:
+        <a Movie 1:> </a>
       </strong>
-       Smooth interpolation of redshift parameter in context vector c, for fixed dark matter field x.
+       Redshift interpolation.
+     </div>
+    </div>
+   </div>
+   <div class="l-article video">
+    <center>
+        <video controls="" loop="" width="80%">
+         <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
+         <source src="https://user-images.githubusercontent.com/26961870/214957478-5830303f-e521-46a7-bbb9-0952bd44d09e.mp4" type="video/mp4"/>
+        </video>
+    </center>
+    <div class="videocaption">
+     <div>
+      <strong>
+        <a Movie 1:> </a>
+      </strong>
+       Redshift interpolation.
      </div>
     </div>
    </div>
@@ -572,11 +573,12 @@ h3.figtitle {
    <h2 id="citation">
     Citation
    </h2>
-   <pre><code>@inproceedings{Karras2021,
-  author = {Tero Karras and Miika Aittala and Samuli Laine and Erik H\"ark\"onen and Janne Hellsten and Jaakko Lehtinen and Timo Aila},
-  title = {Alias-Free Generative Adversarial Networks},
-  booktitle = {Proc. NeurIPS},
-  year = {2021}
+   <pre><code>@article{Bernardini2023,
+  author    = {Maurizio and peeps},
+  title     = {tbd},
+  journal   = {tbd},
+  doi       = {tbd},
+  year      = {2023}
 }</code></pre>
    <h2 id="license">
     License
