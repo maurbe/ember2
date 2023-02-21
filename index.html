@@ -506,9 +506,25 @@ h3.figtitle {
     Architecture
    </h2>
    <p>
-    Text
+    The following figure depicts the main architectural design choices of the neural netowrk models.
+    <strong>
+    a)
+    </strong>
+    A single block in the decoder branch of the synthesis network comprised of a bicubic upsampling step, followed by a concatenation with the skip connection from the corresponding encoder block. The base kernels of the two ModConvs are modulated via an affine layer with the externally mapped style vector <em>w</em>. Between the two convolutions we concatenate 8 channels of gaussian noise to the tensor before feeding it through the second ModConv. Note that the two affine mappings are learned individually.
+    <strong>
+    b)
+    </strong>
+    Total overview of the synthesis network based on the typical U-Net architecture. Features from the input <em>x</em> are extracted via an encoder (blue blocks) comprised of two normal convolutions and a strided convolution for pooling. Subsequently the representations are decoded through a series of ModConv blocks to synthesize <em>y</em>. The Mapping network shown in purple is a simple 8-layer MLP (each layer of size 64) that maps the context tuple (<em>z,r</em>) to the style vector <em>w</em>.
+    <strong>
+    c)
+    </strong>
+    Discriminator architecture comprised of individual blocks featuring a two-path strategy of convolutions in real and fourier space. The last convolution outputs a single scalar representing the score of the discriminator.
+    <strong>
+    d)
+    </strong>
+    Discriminator block comprised of two normal convolutions on the right path. Along the left path the data is first transformed to fourier space, convolved to extract frequency features and subsequently transformed back to real space via the inverse fourier transform. The data from the left and right path are added elemet-wise and pooled by a strided convolution. Note that throughout all networks, we use kernel sizes of 3, strides of 1 (except for the strided convolution, where a stride of 2 is used) and LeakyReLU activation functions.
    </p>
-   <img src="https://raw.githubusercontent.com/maurbe/ember2/gh-pages/scr/overview.png" width="100%"/>
+   <img src="https://raw.githubusercontent.com/maurbe/ember2/gh-pages/scr/nn.png" width="100%"/>
    <h2 id="videos">
     Movies
    </h2>
@@ -521,7 +537,7 @@ h3.figtitle {
     <center>
         <video controls="" loop="" width="80%">
          <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
-         <source src="https://user-images.githubusercontent.com/26961870/206722603-77efc234-5b80-4ecc-b3dc-5f8826397551.mp4" type="video/mp4"/>
+         <source src="https://user-images.githubusercontent.com/26961870/214957478-5830303f-e521-46a7-bbb9-0952bd44d09e.mp4" type="video/mp4"/>
         </video>
     </center>
     <div class="videocaption">
@@ -537,7 +553,7 @@ h3.figtitle {
     <center>
         <video controls="" loop="" width="80%">
          <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
-         <source src="https://user-images.githubusercontent.com/26961870/214957478-5830303f-e521-46a7-bbb9-0952bd44d09e.mp4" type="video/mp4"/>
+         <source src="https://user-images.githubusercontent.com/26961870/206722603-77efc234-5b80-4ecc-b3dc-5f8826397551.mp4" type="video/mp4"/>
         </video>
     </center>
     <div class="videocaption">
