@@ -478,22 +478,18 @@ h3.figtitle {
    <div class="l-article">
     <img src="https://raw.githubusercontent.com/maurbe/ember2/gh-pages/scr/overview.png" width="100%"/>
    </div>
-   <h2 id="abstract">
-    Abstract
-   </h2>
-   <p>
-    abstract text
-   </p>
    <div class="grid download-section">
     <div class="download-thumb">
     </div>
     <div class="download-links">
      <ul>
+    <!--
       <li>
        <a href="https://arxiv.org/abs/?">
         view the paper on arXiv
        </a>
       </li>
+    -->
       <li>
        <a href="https://github.com/maurbe/ember2">
         view the code on GitHub
@@ -502,10 +498,26 @@ h3.figtitle {
      </ul>
     </div>
    </div>
+   <h2 id="abstract">
+    Abstract
+   </h2>
+   <p style="text-align: justify">
+    Galaxy formation is a complex problem that connects large scale cosmsology with small scale astrophysics.
+    Hydrodynamical simulations that follow the baryonic physics exactly are the most sophisticated approach to model galaxy formation, but require large computational costs.
+    Recently, modern emulation techniques based on Convolutional Neural Networks (CNNs) have been trained to emulate baryonic fields directly from dark matter simulations.
+    While these emulators have been shown to capture the relevant physical information, they drastically reduced the involved computational expenses.
+    However, due to their fixed kernel size, basic CNNs fail to capture the multi-scale nature of galaxy formation that ranges from the cosmic web on Mpc scales to galactic scales of sub-kpc.
+    Training basic CNNs over large redshift ranges is challenging, due to the increasing non-linearity of the cosmic fields paired with the memory inefficiency of CNNs.
+    This work introduces EMBER-2, an improved version of the EMBER (EMulating Baryonic EnRichment) framework to emulate baryonic fields over a large redshift range, from <em>z</em>=12 to <em>z</em>=1, at a pixel resolution of 450 cpc/<em>h</em> resolving the interstellar medium (ISM) of individual galaxies.
+    EMBER-2 incorporates a context-based styling network paired with Modulated Convolutions for fast, accurate and memory efficient emulation.
+    Although EMBER-2 uses almost 4 times less trainable parameters than the previous version, the model drastically improves in every tested summary metric including mass conservation (maximum errors of 1%) and cross-correlation coefficients (maximum error of 5%) over the entire redshift range.
+    Furthermore, EMBER-2 emulates galaxies that are consistent with the simulated sample in terms of morphological indicators like the mass-size relation and the clumping factor.
+    The EMBER-2 framework builds the foundation for emulating the entire baryonic sector of galaxies, producing mock catalogues that can directly be incorporated in future analysis pipelines.
+   </p>
    <h2 id="architecture">
     Architecture
    </h2>
-   <p>
+   <p style="text-align: justify">
     The following figure depicts the main architectural design choices of the neural network models.
     <strong>
     a)
@@ -558,21 +570,69 @@ h3.figtitle {
     <div class="videocaption">
      <div>
       <strong>
-        <a Movie 1:> </a>
+        <a Movie 2:> </a>
       </strong>
        Movie 2: Fixing the dark matter patch <em>x</em> with the noise variable and smoothly interpolating the redshift variable <em>z</em>.
+     </div>
+    </div>
+   </div>
+   <div class="l-article video">
+    <center>
+        <video controls="" loop="" width="100%">
+         <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
+         <source src="https://user-images.githubusercontent.com/26961870/251429969-b51c45c3-b12f-4477-b884-9bdfdd040290.mp4" type="video/mp4"/>
+        </video>
+    </center>
+    <div class="videocaption">
+     <div>
+      <strong>
+        <a Movie 3:> </a>
+      </strong>
+       Movie 3: Multifield emulation while changing the conditioning variable <em>x</em> and smoothly interpolating the redshift variable <em>z</em>. From left to right we show the total gas density, radial velocity, temperature and HI density fields. Each pair of panels consists of the simulated (left) and emulated fields (right).
+     </div>
+    </div>
+   </div>
+   <div class="l-article video">
+    <center>
+        <video controls="" loop="" width="100%">
+         <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
+         <source src="https://user-images.githubusercontent.com/26961870/251430025-0ee093fc-c59d-429b-9521-f809ecada986.mp4" type="video/mp4"/>
+        </video>
+    </center>
+    <div class="videocaption">
+     <div>
+      <strong>
+        <a Movie 4:> </a>
+      </strong>
+       Movie 4: Multifield emulation for keeping the conditoning variable <em>x</em> fixed and smoothly interpolate the redshift variable <em>z</em>. From left to right we show the total gas density, radial velocity, temperature and HI density fields emulated with EMBER.
+     </div>
+    </div>
+   </div>
+   <div class="l-article video">
+    <center>
+        <video controls="" loop="" width="100%">
+         <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
+         <source src="https://user-images.githubusercontent.com/26961870/251430046-9e0785fe-aed7-4d5b-8951-f187793f8a82.mp4" type="video/mp4"/>
+        </video>
+    </center>
+    <div class="videocaption">
+     <div>
+      <strong>
+        <a Movie 5:> </a>
+      </strong>
+       Movie 5: In this realization we fix the conditioning variable <em>x</em> and the redshift <em>z</em> and smoothly interpolate samples with different noise variables.
      </div>
     </div>
    </div>
    <h2 id="citation">
     Citation
    </h2>
-   <pre><code>@article{Bernardini2023,
-  author    = {Maurizio and peeps},
+   <pre><code>@article{tbd,
+  author    = {tbd},
   title     = {tbd},
   journal   = {tbd},
   doi       = {tbd},
-  year      = {2023}
+  year      = {tbd}
 }</code></pre>
    <h2 id="license">
     License
@@ -583,10 +643,10 @@ h3.figtitle {
     more text
    </p>
    <h2 id="acknowledgments">
-    Acknowledgments
+    TBA
    </h2>
    <p>
-    acknowledgement text
+    TBA
    </p>
   </div>
   <div class="n-footer">
