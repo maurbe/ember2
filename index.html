@@ -469,7 +469,7 @@ h3.figtitle {
       <sup>
        1
       </sup>
-      Institute for Astrophysics, University of Zurich
+      Department of Astrophysics, University of Zurich
      </li>
     </ul>
    </div>
@@ -517,8 +517,10 @@ h3.figtitle {
    <h2 id="architecture">
     Architecture
    </h2>
+   <img src="https://raw.githubusercontent.com/maurbe/ember2/gh-pages/scr/nn.png" width="100%"/>
+   <p>&nbsp;</p>
    <p style="text-align: justify">
-    The following figure depicts the main architectural design choices of the neural network models.
+    This figure depicts the main architecture design choices of the neural network model.
     <strong>
     a)
     </strong>
@@ -536,7 +538,7 @@ h3.figtitle {
     </strong>
     Discriminator block comprised of two normal convolutions on the right path. Along the left path the data is first transformed to fourier space, convolved to extract frequency features and subsequently transformed back to real space via the inverse fourier transform. The data from the left and right path are added elemet-wise and pooled by a strided convolution. Throughout all networks, we use kernel sizes of 3, strides of 1 (except for the strided convolution, where a stride of 2 is used) and LeakyReLU activation functions.
    </p>
-   <img src="https://raw.githubusercontent.com/maurbe/ember2/gh-pages/scr/nn.png" width="100%"/>
+   
    <h2 id="movies">
     Movies
    </h2>
