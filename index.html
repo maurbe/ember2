@@ -446,6 +446,12 @@ h3.figtitle {
       </sup>
      </li>
      <li>
+      Jindra Gensior
+      <sup>
+       1
+      </sup>
+     </li>
+     <li>
       Luigi Bassini
       <sup>
        1
@@ -458,7 +464,7 @@ h3.figtitle {
       </sup>
      </li>
      <li>
-      Jindra Gensior
+      Lucas Tortora
       <sup>
        1
       </sup>
@@ -502,17 +508,15 @@ h3.figtitle {
     Abstract
    </h2>
    <p style="text-align: justify">
-    Galaxy formation is a complex problem that connects large scale cosmsology with small scale astrophysics.
-    Hydrodynamical simulations that follow the baryonic physics exactly are the most sophisticated approach to model galaxy formation, but require large computational costs.
-    Recently, modern emulation techniques based on Convolutional Neural Networks (CNNs) have been trained to emulate baryonic fields directly from dark matter simulations.
-    While these emulators have been shown to capture the relevant physical information, they drastically reduced the involved computational expenses.
-    However, due to their fixed kernel size, basic CNNs fail to capture the multi-scale nature of galaxy formation that ranges from the cosmic web on Mpc scales to galactic scales of sub-kpc.
-    Training basic CNNs over large redshift ranges is challenging, due to the increasing non-linearity of the cosmic fields paired with the memory inefficiency of CNNs.
-    This work introduces EMBER-2, an improved version of the EMBER (EMulating Baryonic EnRichment) framework to emulate baryonic fields over a large redshift range, from <em>z</em>=12 to <em>z</em>=1, at a pixel resolution of 450 cpc/<em>h</em> resolving the interstellar medium (ISM) of individual galaxies.
-    EMBER-2 incorporates a context-based styling network paired with Modulated Convolutions for fast, accurate and memory efficient emulation.
-    Although EMBER-2 uses almost 4 times less trainable parameters than the previous version, the model drastically improves in every tested summary metric including mass conservation (maximum errors of 1%) and cross-correlation coefficients (maximum error of 5%) over the entire redshift range.
-    Furthermore, EMBER-2 emulates galaxies that are consistent with the simulated sample in terms of morphological indicators like the mass-size relation and the clumping factor.
-    The EMBER-2 framework builds the foundation for emulating the entire baryonic sector of galaxies, producing mock catalogues that can directly be incorporated in future analysis pipelines.
+       Galaxy formation is a complex problem that connects large scale cosmology with small scale astrophysics over cosmic timescales.
+       Hydrodynamical simulations are the most sophisticated approach to model galaxy formation, but require large computational costs.
+       Recently, emulation techniques based on Convolutional Neural Networks (CNNs) have been trained to emulate baryonic properties directly from dark matter simulations.
+       The advantage of these emulators is their ability to capture relevant correlations, but at a fraction of the computational cost compared to simulations.
+       However, training basic CNNs over large redshift ranges is challenging, due to the increasing non-linear interplay between dark matter and baryons paired with the memory inefficiency of CNNs.
+       This work introduces EMBER-2, an improved version of the EMBER (EMulating Baryonic EnRichment) framework to emulate baryon channels including gas density, velocity, temperature and HI density over a large redshift range, from <em>z</em>=6 to <em>z</em>=0.
+       EMBER-2 incorporates a context-based styling network paired with Modulated Convolutions for fast, accurate and memory efficient emulation capable of interpolating the entire redshift range with a single CNN.
+       Although EMBER-2 uses more than 6x less trainable parameters than the previous version, the model improves in every tested summary metric including gas mass conservation (errors of order 3%) and cross-correlation coefficients (errors of order ?%) over the entire redshift range.
+       The EMBER-2 framework builds the foundation for emulating further baryon channels over cosmic time, producing mock catalogues that can directly be incorporated in future analysis pipelines.
    </p>
    <h2 id="architecture">
     Architecture
@@ -544,51 +548,19 @@ h3.figtitle {
    </h2>
    <p>
     The following videos are part of the analysis performed on the learned distribution acting as a visual guide.
-    Smooth interpolation of redshift parameter in context vector <em>c</em>, for fixed dark matter field <em>x</em>.
+    Predicting target fields by smoothly interpolating the redshift parameter <em>r</em> and corresponding dark matter patch <em>x</em>.
    </p>
    <div class="l-article video">
     <center>
         <video controls="" loop="" width="100%">
          <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
-         <source src="https://user-images.githubusercontent.com/26961870/222970696-63bf15ca-7df0-4845-b9f9-3d78e89ad61a.mp4" type="video/mp4"/>
+         <source src="https://github.com/maurbe/ember2/assets/26961870/179261c3-7f8b-45a0-b650-f034e8f7e5dc.mp4" type="video/mp4"/>
         </video>
     </center>
     <div class="videocaption">
      <div>
       <strong>
         <a Movie 1:> </a>
-      </strong>
-       Movie 1: Fixing the dark matter patch <em>x</em> with the noise variable and smoothly interpolating the redshift variable <em>z</em>.
-     </div>
-    </div>
-   </div>
-   <div class="l-article video">
-    <center>
-        <video controls="" loop="" width="100%">
-         <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
-         <source src="https://user-images.githubusercontent.com/26961870/222970738-2970c828-9ed0-477d-986a-fb9317c7f41e.mp4" type="video/mp4"/>
-        </video>
-    </center>
-    <div class="videocaption">
-     <div>
-      <strong>
-        <a Movie 2:> </a>
-      </strong>
-       Movie 2: Fixing the dark matter patch <em>x</em> with the redshift variable <em>z</em> and smoothly interpolating different noise realizations.
-     </div>
-    </div>
-   </div>
-   <div class="l-article video">
-    <center>
-        <video controls="" loop="" width="100%">
-         <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
-         <source src="https://user-images.githubusercontent.com/26961870/251429969-b51c45c3-b12f-4477-b884-9bdfdd040290.mp4" type="video/mp4"/>
-        </video>
-    </center>
-    <div class="videocaption">
-     <div>
-      <strong>
-        <a Movie 3:> </a>
       </strong>
        Movie 3: Multifield emulation while changing the conditioning variable <em>x</em> and smoothly interpolating the redshift variable <em>z</em>. From left to right we show the total gas density, radial velocity, temperature and HI density fields. Each pair of panels consists of the simulated (left) and emulated fields (right).
      </div>
@@ -598,15 +570,15 @@ h3.figtitle {
     <center>
         <video controls="" loop="" width="100%">
          <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
-         <source src="https://user-images.githubusercontent.com/26961870/251430025-0ee093fc-c59d-429b-9521-f809ecada986.mp4" type="video/mp4"/>
+         <source src="https://github.com/maurbe/ember2/assets/26961870/19bd45a9-0ef6-49d1-bb6d-488b0a6a0171.mp4" type="video/mp4"/>
         </video>
     </center>
     <div class="videocaption">
      <div>
       <strong>
-        <a Movie 4:> </a>
+        <a Movie 2:> </a>
       </strong>
-       Movie 4: Multifield emulation for keeping the conditoning variable <em>x</em> fixed and smoothly interpolate the redshift variable <em>z</em>. From left to right we show the total gas density, radial velocity, temperature and HI density fields emulated with EMBER.
+       Movie 4: Multifield emulation for keeping the conditioning variable <em>x</em> fixed and smoothly interpolate the redshift variable <em>z</em>. From left to right we show the total gas density, radial velocity, temperature and HI density fields emulated with EMBER.
      </div>
     </div>
    </div>
@@ -614,13 +586,13 @@ h3.figtitle {
     <center>
         <video controls="" loop="" width="100%">
          <!-- t=0.001 is a hack to make iPhone show video thumbnail -->
-         <source src="https://user-images.githubusercontent.com/26961870/251430046-9e0785fe-aed7-4d5b-8951-f187793f8a82.mp4" type="video/mp4"/>
+         <source src="https://github.com/maurbe/ember2/assets/26961870/1e64b40f-0e3f-477a-80d0-2f368603015b.mp4" type="video/mp4"/>
         </video>
     </center>
     <div class="videocaption">
      <div>
       <strong>
-        <a Movie 5:> </a>
+        <a Movie 3:> </a>
       </strong>
        Movie 5: In this realization we fix the conditioning variable <em>x</em> and the redshift <em>z</em> and smoothly interpolate samples with different noise variables.
      </div>
