@@ -458,6 +458,12 @@ h3.figtitle {
       </sup>
      </li>
      <li>
+      Rebekka Coles-Bieri
+      <sup>
+       1
+      </sup>
+     </li>
+     <li>
       Elia Cenci
       <sup>
        1
@@ -509,14 +515,19 @@ h3.figtitle {
    </h2>
    <p style="text-align: justify">
        Galaxy formation is a complex problem that connects large scale cosmology with small scale astrophysics over cosmic timescales.
-       Hydrodynamical simulations are the most sophisticated approach to model galaxy formation, but require large computational costs.
-       Recently, emulation techniques based on Convolutional Neural Networks (CNNs) have been trained to emulate baryonic properties directly from dark matter simulations.
+       Hydrodynamical simulations are the most sophisticated approach to model galaxy formation, but have large computational costs.
+       Recently, emulation techniques based on Convolutional Neural Networks (CNNs) have been proposed to emulate baryonic properties directly from dark matter simulations.
        The advantage of these emulators is their ability to capture relevant correlations, but at a fraction of the computational cost compared to simulations.
-       However, training basic CNNs over large redshift ranges is challenging, due to the increasing non-linear interplay between dark matter and baryons paired with the memory inefficiency of CNNs.
-       This work introduces EMBER-2, an improved version of the EMBER (EMulating Baryonic EnRichment) framework to emulate baryon channels including gas density, velocity, temperature and HI density over a large redshift range, from <em>z</em>=6 to <em>z</em>=0.
-       EMBER-2 incorporates a context-based styling network paired with Modulated Convolutions for fast, accurate and memory efficient emulation capable of interpolating the entire redshift range with a single CNN.
-       Although EMBER-2 uses more than 6x less trainable parameters than the previous version, the model improves in every tested summary metric including gas mass conservation (errors of order 3%) and cross-correlation coefficients (errors of order ?%) over the entire redshift range.
-       The EMBER-2 framework builds the foundation for emulating further baryon channels over cosmic time, producing mock catalogues that can directly be incorporated in future analysis pipelines.
+       However, training basic CNNs over large redshift ranges is challenging, due to the increasing non-linear interplay between dark matter and baryons
+       paired with the memory inefficiency of CNNs.
+       This work introduces EMBER-2, an improved version of the EMBER (EMulating Baryonic EnRichment) framework, to emulate baryon channels including gas density, velocity,
+       temperature and HI density over a large redshift range, from <em>z</em>=6 to <em>z</em>=0.
+       EMBER-2 incorporates a context-based styling network paired with Modulated Convolutions for fast, accurate and memory efficient emulation capable of interpolating
+       the entire redshift range with a single CNN.
+       Although EMBER-2 uses more than 6x less trainable parameters than the previous version, the model improves in every tested summary metric including gas mass conservation
+       and cross-correlation coefficients.
+       The EMBER-2 framework builds the foundation to produce mock catalogues of field level data and derived summary statistics that can directly be incorporated in
+       future analysis pipelines.
    </p>
    <h2 id="architecture">
     Architecture
@@ -528,19 +539,28 @@ h3.figtitle {
     <strong>
     a)
     </strong>
-    Total overview of the synthesis network based on the typical U-Net architecture. Features from the input <em>x</em> are extracted via an encoder (blue blocks) comprised of two normal convolutions and a strided convolution for pooling. Subsequently the representations are decoded through a series of ModConv blocks to synthesize <em>y</em>. The Mapping network shown in purple is a simple 5-layer multi-layer perceptron (each layer of size 64) that maps the global redshift information <em>z</em> to the style vector <em>w</em>.
+    Schematic overview of the generator based on the typical U-Net architecture. Features from the input <em>x</em> are extracted via an encoder (blue blocks) comprised of
+    two normal convolutions and a strided convolution for pooling. Subsequently the representations are decoded through a series of ModConv blocks to synthesize <em>y</em>.
+    The Mapping network shown in purple is a simple 5-layer multi-layer perceptron that maps the global redshift information <em>z</em> to the style vector <em>w</em>.
     <strong>
     b)
     </strong>
-    A single block in the decoder branch of the synthesis network comprised of a bicubic upsampling step, followed by a concatenation with the skip connection from the corresponding encoder block. The base kernels of the two ModConvs are modulated via an affine layer with the externally mapped style vector <em>w</em>. Between the two convolutions we concatenate 8 channels of gaussian noise to the tensor before feeding it through the second ModConv. Note that the two affine mappings are learned individually.
+    Zoom-in of a single block in the decoder branch of the synthesis network comprised of a bicubic upsampling step, followed by a concatenation with the skip connection
+    from the corresponding encoder block. The base kernels of the two ModConvs are modulated via an affine layer with the externally mapped style vector <em>w</em>.
+    Between the two convolutions we concatenate 8 channels of gaussian noise to the tensor before feeding it through the second ModConv.
+    We emphasize that the two affine mappings are learned individually.
     <strong>
     c)
     </strong>
-    Discriminator architecture comprised of individual blocks featuring a two-path strategy of convolutions in real and fourier space. The last convolution outputs a single scalar representing the score of the discriminator.
+    Schematic of the discriminator comprised of individual blocks featuring a two-path strategy of convolutions in real and Fourier space.
+    The last convolution outputs a single scalar representing the score of the discriminator.
     <strong>
     d)
     </strong>
-    Discriminator block comprised of two normal convolutions on the right path. Along the left path the data is first transformed to fourier space, convolved to extract frequency features and subsequently transformed back to real space via the inverse fourier transform. The data from the left and right path are added elemet-wise and pooled by a strided convolution. Throughout all networks, we use kernel sizes of 3, strides of 1 (except for the strided convolution, where a stride of 2 is used) and LeakyReLU activation functions.
+    Discriminator block comprised of two normal convolutions on the right path. Along the left path the data is first transformed to Fourier space,
+    convolved to extract frequency features and subsequently transformed back to real space via the inverse Fourier transform.
+    The data from the left and right path are added element-wise and pooled by a strided convolution.
+    Throughout all networks, we use kernel sizes of 3 and strides of 1 (except for the strided convolution, where a stride of 2 is used).
    </p>
 
    <h2 id="movies">
