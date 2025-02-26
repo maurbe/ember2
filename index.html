@@ -448,9 +448,15 @@ h3.figtitle {
      <li>
       Jindra Gensior
       <sup>
-       1
+       2
       </sup>
      </li>
+     <li>
+        Daniel Anglés-Alcázar
+        <sup>
+         3,4
+        </sup>
+       </li>
      <li>
       Luigi Bassini
       <sup>
@@ -458,7 +464,7 @@ h3.figtitle {
       </sup>
      </li>
      <li>
-      Rebekka Coles-Bieri
+      Rebekka Bieri
       <sup>
        1
       </sup>
@@ -475,13 +481,35 @@ h3.figtitle {
        1
       </sup>
      </li>
+     <li>
+        Claude-André Faucher-Giguère
+        <sup>
+         5
+        </sup>
+       </li>
     </ul>
     <ul class="authors affiliations">
      <li>
       <sup>
        1
       </sup>
-      Department of Astrophysics, University of Zurich
+      Department of Astrophysics, University of Zurich <br>
+      <sup>
+        2
+       </sup>
+      Institute for Astronomy, University of Edinburgh <br>
+      <sup>
+        3
+       </sup>
+       Department of Physics, University of Connecticut <br>
+      <sup>
+        4
+       </sup>
+       Center for Computational Astrophysics, Flatiron Institute <br>
+      <sup>
+        5
+       </sup>
+       Center for Interdisciplinary Exploration and Research in Astrophysics (CIERA)
      </li>
     </ul>
    </div>
@@ -514,20 +542,19 @@ h3.figtitle {
     Abstract
    </h2>
    <p style="text-align: justify">
-       Galaxy formation is a complex problem that connects large scale cosmology with small scale astrophysics over cosmic timescales.
-       Hydrodynamical simulations are the most sophisticated approach to model galaxy formation, but have large computational costs.
-       Recently, emulation techniques based on Convolutional Neural Networks (CNNs) have been proposed to emulate baryonic properties directly from dark matter simulations.
-       The advantage of these emulators is their ability to capture relevant correlations, but at a fraction of the computational cost compared to simulations.
-       However, training basic CNNs over large redshift ranges is challenging, due to the increasing non-linear interplay between dark matter and baryons
-       paired with the memory inefficiency of CNNs.
-       This work introduces EMBER-2, an improved version of the EMBER (EMulating Baryonic EnRichment) framework, to emulate baryon channels including gas density, velocity,
-       temperature and HI density over a large redshift range, from <em>z</em>=6 to <em>z</em>=0.
-       EMBER-2 incorporates a context-based styling network paired with Modulated Convolutions for fast, accurate and memory efficient emulation capable of interpolating
-       the entire redshift range with a single CNN.
-       Although EMBER-2 uses more than 6x less trainable parameters than the previous version, the model improves in every tested summary metric including gas mass conservation
-       and cross-correlation coefficients.
-       The EMBER-2 framework builds the foundation to produce mock catalogues of field level data and derived summary statistics that can directly be incorporated in
-       future analysis pipelines.
+       Galaxy formation is a complex problem that connects large scale cosmology with small scale astrophysics over cosmic timescales.Hydrodynamical simulations are the most principled approach to model galaxy formation, but have large computational costs.
+       Recently, emulation techniques based on Convolutional Neural Networks (CNNs) have been proposed to predict baryonic
+       properties directly from dark matter simulations. The advantage of these emulators is their ability to capture relevant correlations,
+       but at a fraction of the computational cost compared to simulations. However, training basic CNNs over large redshift ranges is
+       challenging, due to the increasing non-linear interplay between dark matter and baryons paired with the memory inefficiency of
+       CNNs. This work introduces EMBER-2, an improved version of the EMBER (EMulating Baryonic EnRichment) framework,
+       to simultaneously emulate multiple baryon channels including gas density, velocity, temperature and HI density over a large
+       redshift range, from <em>z</em>=6 to <em>z</em>=0. EMBER-2 incorporates a context-based styling network paired with Modulated Convolutions
+       for fast, accurate and memory efficient emulation capable of interpolating the entire redshift range with a single CNN. Although
+       EMBER-2 uses fewer than 1/6 the number of trainable parameters than the previous version, the model improves in every
+       tested summary metric including gas mass conservation and cross-correlation coefficients. The EMBER-2 framework builds the
+       foundation to produce mock catalogues of field level data and derived summary statistics that can directly be incorporated in
+       future analysis pipelines. 
    </p>
    <h2 id="architecture">
     Architecture
@@ -536,12 +563,14 @@ h3.figtitle {
    <p>&nbsp;</p>
    <p style="text-align: justify">
     This figure depicts the main architecture design choices of the neural network model.
+    <br>
     <strong>
     a)
     </strong>
     Schematic overview of the generator based on the typical U-Net architecture. Features from the input <em>x</em> are extracted via an encoder (blue blocks) comprised of
     two normal convolutions and a strided convolution for pooling. Subsequently the representations are decoded through a series of ModConv blocks to synthesize <em>y</em>.
     The Mapping network shown in purple is a simple 5-layer multi-layer perceptron that maps the global redshift information <em>z</em> to the style vector <em>w</em>.
+    <br>
     <strong>
     b)
     </strong>
@@ -549,11 +578,13 @@ h3.figtitle {
     from the corresponding encoder block. The base kernels of the two ModConvs are modulated via an affine layer with the externally mapped style vector <em>w</em>.
     Between the two convolutions we concatenate 8 channels of gaussian noise to the tensor before feeding it through the second ModConv.
     We emphasize that the two affine mappings are learned individually.
+    <br>
     <strong>
     c)
     </strong>
     Schematic of the discriminator comprised of individual blocks featuring a two-path strategy of convolutions in real and Fourier space.
     The last convolution outputs a single scalar representing the score of the discriminator.
+    <br>
     <strong>
     d)
     </strong>
@@ -581,7 +612,9 @@ h3.figtitle {
       <strong>
         <a Movie 1:> </a>
       </strong>
-       Movie 1: Multifield emulation while changing the conditioning variable <em>x</em> and smoothly interpolating the redshift variable <em>z</em>. From left to right we show the total gas density, radial velocity, temperature and HI density fields. Each pair of panels consists of the simulated (left) and emulated fields (right).
+       Movie 1: Multifield emulation while changing the conditioning variable <em>x</em> (dark matter inputs) and smoothly interpolating the redshift variable <em>z</em>. 
+       From left to right we show the total gas density, radial velocity, temperature and HI density fields. Each pair of panels consists of the simulated (left) and 
+       emulated fields (right). The redshift is indicated in the bottom left corner.
      </div>
     </div>
    </div>
@@ -620,12 +653,12 @@ h3.figtitle {
    <h2 id="citation">
     Citation
    </h2>
-   <pre><code>@article{tbd,
-  author    = {tbd},
-  title     = {tbd},
-  journal   = {tbd},
-  doi       = {tbd},
-  year      = {tbd}}
+   <pre><code>@article{bernardini_2025,
+  author  = {Mauro Bernardini, Robert Feldmann, Jindra Gensior, Daniel Anglés-Alcázar, Luigi Bassini, Rebekka Bieri, Elia Cenci, Lucas Tortora and Claude-André Faucher-Giguère},
+  title   = {EMBER-2: Emulating baryons from dark matter across cosmic time with deep modulation networks},
+  journal = {Monthly Notices of the Royal Astronomical Society},
+  doi     = {10.1093/mnras/staf341},
+  year    = {2025}}
    </code></pre>
   <div class="n-footer">
   </div>
